@@ -5,4 +5,10 @@
     flex: 1;
     min-width: 0; // for swiper
   }
+
+  @media (max-width: 768px) {
+    &__content {
+      padding-bottom: var(--bottombar-height, 4.25rem);
+    }
+  }
 }

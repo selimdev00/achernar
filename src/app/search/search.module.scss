@@ -1,0 +1,49 @@
+.field {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.7em 1em;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 1.4em;
+  transition: border-color var(--main-transition-time) ease;
+
+  &:focus-within {
+    border-color: rgba(106, 17, 203, 0.6);
+  }
+
+  &__icon {
+    display: inline-flex;
+    color: var(--main-gray);
+
+    svg {
+      width: 1.2em;
+      height: 1.2em;
+    }
+  }
+
+  &__input {
+    flex: 1;
+    border: none;
+    background: none;
+    outline: none;
+    color: var(--main-white);
+    font-size: 1em;
+
+    &::placeholder {
+      color: var(--main-gray-medium);
+    }
+  }
+}
+
+.count {
+  color: var(--main-gray);
+  font-size: 0.85em;
+  margin-bottom: 1em;
+}
+
+.empty {
+  color: var(--main-gray);
+  padding: 2em 0;
+}

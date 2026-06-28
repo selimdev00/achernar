@@ -1,0 +1,49 @@
+.watch {
+  padding: 1.6em var(--sidebar-width) 4em 1.4em;
+  max-width: 70em;
+
+  @media (max-width: 768px) {
+    padding: 1.2em 1.2em 3em;
+  }
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 1em;
+  color: var(--main-gray);
+  font-size: 0.95em;
+  transition: color var(--main-transition-time) ease;
+
+  &:hover {
+    color: var(--main-white);
+  }
+}
+
+.info {
+  margin-top: 1.4em;
+}
+
+.title {
+  font-size: 1.9em;
+  font-weight: 700;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em 1em;
+  margin: 0.6em 0 0.9em;
+  color: var(--main-gray);
+  font-size: 0.9em;
+
+  &__rating {
+    color: #ffce4f;
+    font-weight: 600;
+  }
+}
+
+.description {
+  max-width: 44em;
+  line-height: 1.55;
+  color: #e6e6e6;
+}

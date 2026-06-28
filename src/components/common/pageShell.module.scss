@@ -1,0 +1,23 @@
+.page {
+  padding: 2.4em var(--sidebar-width) 4em 1.4em;
+  min-height: 100vh;
+
+  &__header {
+    margin-bottom: 1.8em;
+  }
+
+  &__title {
+    font-size: 2.1em;
+    font-weight: 700;
+  }
+
+  &__subtitle {
+    margin-top: 0.4em;
+    font-size: 1em;
+    color: var(--main-gray);
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.8em 1.2em 3em;
+  }
+}

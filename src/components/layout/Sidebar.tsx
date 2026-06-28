@@ -1,6 +1,8 @@
 "use client";
 
 import styles from "./sidebar.module.scss";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import {
   ArrowUpIcon,
@@ -12,91 +14,57 @@ import {
   TVIcon,
   AccountIcon,
 } from "@/components/icons";
-import Link from "next/link";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const nav = [
-  {
-    id: "search",
-    title: "Поиск",
-    link: "/search",
-    icon: <SearchIcon />,
-  },
-  {
-    id: "main",
-    title: "Главная",
-    link: "/",
-    icon: <HomeIcon />,
-  },
-  {
-    id: "catalog",
-    title: "Каталог",
-    link: "/catalog",
-    icon: <VideoIcon />,
-  },
-  {
-    id: "tv",
-    title: "ТВ каналы",
-    link: "/tv",
-    icon: <TVIcon />,
-  },
-  {
-    id: "favorites",
-    title: "Моё",
-    link: "/favorites",
-    icon: <HeartIcon />,
-  },
-  {
-    id: "account",
-    title: "Аккаунт",
-    link: "/account",
-    icon: <AccountIcon />,
-  },
+  { id: "search", title: "Поиск", link: "/search", icon: <SearchIcon /> },
+  { id: "main", title: "Главная", link: "/", icon: <HomeIcon /> },
+  { id: "catalog", title: "Каталог", link: "/catalog", icon: <VideoIcon /> },
+  { id: "tv", title: "ТВ каналы", link: "/tv", icon: <TVIcon /> },
+  { id: "favorites", title: "Моё", link: "/favorites", icon: <HeartIcon /> },
+  { id: "account", title: "Аккаунт", link: "/account", icon: <AccountIcon /> },
 ];
+
 export default function LayoutSidebar() {
+  const pathname = usePathname();
+  const [showUp, setShowUp] = useState(false);
+
   useEffect(() => {
-    const up = document.querySelector(`.${styles.layoutSidebar__up}`);
-
-    window.addEventListener("scroll", () => {
-      if (window.pageYOffset > 0) {
-        up?.classList.add(styles.active);
-      } else {
-        up?.classList.remove(styles.active);
-      }
-    });
-
-    up?.addEventListener("click", () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    });
-
-    return () => {
-      up?.removeEventListener("click", () => {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-      });
-    };
+    const onScroll = () => setShowUp(window.scrollY > 0);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const isActive = (link: string) =>
+    link === "/" ? pathname === "/" : pathname.startsWith(link);
 
   return (
     <div className={styles.layoutSidebar}>
       <div>
-        <LogoIcon />
+        <Link href="/" aria-label="На главную" className={styles.layoutSidebar__logo}>
+          <LogoIcon />
+        </Link>
 
-        <nav className={styles.layoutSidebar__nav}>
+        <nav
+          aria-label="Основная навигация"
+          className={styles.layoutSidebar__nav}
+        >
           <ul className={styles.layoutSidebar__nav__list}>
             {nav.map((item) => (
               <li key={item.id}>
                 <Link
                   href={item.link}
-                  className={styles.layoutSidebar__nav__list__item}
+                  aria-current={isActive(item.link) ? "page" : undefined}
+                  className={`${styles.layoutSidebar__nav__list__item} ${
+                    isActive(item.link) ? styles.active : ""
+                  }`}
                 >
-                  {item.icon} <span>{item.title}</span>
+                  <span className={styles.icon} aria-hidden="true">
+                    {item.icon}
+                  </span>
+                  <span className={styles.label}>{item.title}</span>
                 </Link>
               </li>
             ))}
@@ -104,9 +72,15 @@ export default function LayoutSidebar() {
         </nav>
       </div>
 
-      <div className={styles.layoutSidebar__up}>
+      <button
+        type="button"
+        aria-label="Наверх"
+        tabIndex={showUp ? 0 : -1}
+        className={`${styles.layoutSidebar__up} ${showUp ? styles.active : ""}`}
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      >
         <ArrowUpIcon />
-      </div>
+      </button>
     </div>
   );
 }

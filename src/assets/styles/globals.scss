@@ -28,6 +28,7 @@
   );
 
   --sidebar-width: 216px;
+  --bottombar-height: 4.25rem;
 }
 
 * {
@@ -40,6 +41,31 @@ html {
   font-size: 28px;
   scroll-behavior: smooth;
   color: var(--main-white);
+}
+
+// Scale the whole em-based UI down on smaller screens (design unchanged).
+@media (max-width: 1280px) {
+  html {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 1024px) {
+  html {
+    font-size: 21px;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 15px;
+  }
 }
 
 html,
@@ -67,6 +93,26 @@ a {
 
 ul {
   list-style: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--main-white);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 html.lenis {

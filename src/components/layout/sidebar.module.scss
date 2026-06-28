@@ -8,7 +8,24 @@
   justify-content: space-between;
   align-items: flex-start;
   width: var(--sidebar-width);
+  flex-shrink: 0;
   z-index: 99;
+
+  &__logo {
+    display: inline-flex;
+    color: var(--main-white);
+
+    svg {
+      width: 2.6em;
+      height: auto;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--main-white-30);
+      outline-offset: 4px;
+      border-radius: 6px;
+    }
+  }
 
   &__nav {
     margin-top: 3.9em;
@@ -20,22 +37,74 @@
       gap: 1.35em;
 
       &__item {
-        display: flex;
+        position: relative;
+        display: inline-flex;
         align-items: center;
-        gap: 0.6em;
+        width: max-content;
+        color: inherit;
         transition: color var(--main-transition-time) ease;
-        white-space: nowrap;
 
-        span {
-          opacity: 0;
-          transition: opacity var(--main-transition-time) ease;
+        .icon {
+          display: inline-flex;
+
+          svg {
+            display: block;
+          }
         }
 
-        &:hover {
+        // Flyout label: own background chip so it never bleeds onto content.
+        .label {
+          position: absolute;
+          left: calc(100% + 0.55em);
+          top: 50%;
+          transform: translateY(-50%) translateX(-6px);
+          white-space: nowrap;
+          background: var(--main-black);
+          color: var(--main-white);
+          padding: 0.32em 0.72em;
+          border-radius: 8px;
+          font-size: 0.92em;
+          opacity: 0;
+          pointer-events: none;
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+          transition:
+            opacity var(--main-transition-time) ease,
+            transform var(--main-transition-time) ease;
+        }
+
+        &:hover,
+        &:focus-visible {
           color: var(--main-white);
 
-          span {
+          .label {
             opacity: 1;
+            transform: translateY(-50%) translateX(0);
+          }
+        }
+
+        &:focus-visible {
+          outline: none;
+
+          .icon {
+            outline: 2px solid var(--main-white-30);
+            outline-offset: 4px;
+            border-radius: 6px;
+          }
+        }
+
+        &.active {
+          color: var(--main-white);
+
+          .icon::after {
+            content: "";
+            position: absolute;
+            left: -1.1em;
+            top: 50%;
+            width: 3px;
+            height: 1.4em;
+            border-radius: 999px;
+            background: var(--gradient-accent);
+            transform: translateY(-50%);
           }
         }
       }
@@ -43,10 +112,14 @@
   }
 
   &__up {
+    appearance: none;
+    border: none;
+    background: none;
+    padding: 0;
     color: var(--main-gray);
     transition: all var(--main-transition-time) ease;
     cursor: pointer;
-    display: inline-block;
+    display: inline-flex;
     opacity: 0;
     pointer-events: none;
 
@@ -57,6 +130,66 @@
 
     &:hover {
       color: var(--main-white);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--main-white-30);
+      outline-offset: 4px;
+      border-radius: 6px;
+    }
+  }
+
+  // Mobile: fixed bottom tab bar, icons only (label chips hidden).
+  @media (max-width: 768px) {
+    position: fixed;
+    inset: auto 0 0 0;
+    top: auto;
+    height: var(--bottombar-height, 4.25rem);
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 0.8em;
+    background: rgba(9, 9, 12, 0.96);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+    & > div:first-child {
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+
+    &__logo {
+      display: none;
+    }
+
+    &__nav {
+      margin-top: 0;
+      flex: 1;
+
+      &__list {
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 0;
+
+        &__item {
+          .label {
+            display: none;
+          }
+
+          &.active .icon::after {
+            left: 50%;
+            top: -0.7em;
+            width: 1.4em;
+            height: 3px;
+            transform: translateX(-50%);
+          }
+        }
+      }
+    }
+
+    &__up {
+      display: none;
     }
   }
 }

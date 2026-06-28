@@ -1,0 +1,128 @@
+.movie {
+  position: relative;
+  padding: 0 var(--sidebar-width) 4em 1.4em;
+
+  @media (max-width: 768px) {
+    padding: 0 1.2em 3em;
+  }
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 28em;
+  z-index: -1;
+
+  &__shade {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(9, 9, 12, 0.4) 0%, var(--main-black) 92%),
+      linear-gradient(90deg, rgba(9, 9, 12, 0.6), rgba(9, 9, 12, 0.1));
+  }
+}
+
+.head {
+  display: flex;
+  gap: 1.8em;
+  padding-top: 9em;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    padding-top: 6em;
+    gap: 1.2em;
+  }
+}
+
+.poster {
+  position: relative;
+  width: 12em;
+  flex-shrink: 0;
+  aspect-ratio: 2 / 3;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.6);
+
+  @media (max-width: 600px) {
+    width: 8em;
+  }
+
+  &__body {
+    flex: 1;
+  }
+}
+
+.head__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-size: 2.4em;
+  font-weight: 700;
+  line-height: 1.05;
+
+  @media (max-width: 600px) {
+    font-size: 1.8em;
+  }
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4em 1em;
+  margin: 0.8em 0;
+  color: var(--main-gray);
+  font-size: 0.9em;
+
+  &__rating {
+    color: #ffce4f;
+    font-weight: 600;
+  }
+}
+
+.description {
+  max-width: 40em;
+  line-height: 1.55;
+  color: #e6e6e6;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8em;
+  margin-top: 1.4em;
+}
+
+.play {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.75em 1.5em;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 1.07em;
+  color: var(--main-white);
+  background: var(--gradient-accent);
+  transition:
+    transform var(--main-transition-time) ease,
+    filter var(--main-transition-time) ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.08);
+  }
+}
+
+.similar {
+  margin-top: 3em;
+
+  &__title {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-bottom: 1em;
+  }
+}

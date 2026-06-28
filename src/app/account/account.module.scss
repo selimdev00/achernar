@@ -1,0 +1,100 @@
+.card {
+  display: flex;
+  align-items: center;
+  gap: 1.2em;
+  padding: 1.4em;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.avatar {
+  width: 4em;
+  height: 4em;
+  flex-shrink: 0;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 1.6em;
+  font-weight: 700;
+  color: var(--main-white);
+  background: var(--gradient-accent);
+}
+
+.name {
+  font-size: 1.4em;
+  font-weight: 700;
+}
+
+.email {
+  color: var(--main-gray);
+  font-size: 0.9em;
+  margin-top: 0.15em;
+}
+
+.plan {
+  display: inline-block;
+  margin-top: 0.5em;
+  font-size: 0.8em;
+  color: var(--main-white);
+  padding: 0.25em 0.7em;
+  border-radius: 999px;
+  background: rgba(106, 17, 203, 0.25);
+  border: 1px solid rgba(106, 17, 203, 0.5);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8em;
+  margin: 1.2em 0;
+}
+
+.stat {
+  padding: 1em;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  text-align: center;
+
+  &__value {
+    display: block;
+    font-size: 1.6em;
+    font-weight: 700;
+  }
+
+  &__label {
+    font-size: 0.8em;
+    color: var(--main-gray);
+  }
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.row {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 1.2em;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--main-white);
+  font-size: 0.95em;
+  text-align: left;
+  transition: background var(--main-transition-time) ease;
+
+  span {
+    color: var(--main-gray);
+    font-size: 1.3em;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+}

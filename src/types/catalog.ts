@@ -1,6 +1,7 @@
 export type CatalogSliderItemType = {
-  id: number;
+  id: number | string;
   title: string;
   poster: string;
   rating: string;
+  href?: string;
 };
